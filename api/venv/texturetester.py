@@ -3,7 +3,7 @@ import numpy as np
 import cv2 
 import os
 import re
-import functions
+import functions as fn
 
 # -------------------- Utility function ------------------------
 def normalize_label(str_):
@@ -90,8 +90,6 @@ if os.path.exists(dataset_dir) and os.path.isdir(dataset_dir):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
             img_path = os.path.join(dataset_dir, filename)
             img = cv2.imread(img_path)
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
             
             # # imgs.append(gray)
             # labels.append(normalize_label(os.path.splitext(filename)[0]))
@@ -99,14 +97,7 @@ if os.path.exists(dataset_dir) and os.path.isdir(dataset_dir):
 
             # processedfiles += 1
             # print(f"Processedfiles{processedfiles}" )
-print(gray)
-print(gray[17][3])
 
-# preview the image, show that it works.
-# cv2.imshow("test img", imgs[0])
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-# Matrix greyscale
 
 
 # frameworkmat = [[0 for i in range (256)] for j in range (256)]

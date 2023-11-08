@@ -1,5 +1,6 @@
 import math 
 
+# Transpose matriks tapi ga kepake
 def transpose(Matriks,ukuran):
     Matrikstemp = [[0 for i in range (ukuran)] for j in range (ukuran)]
     for baris in range (ukuran):
@@ -7,22 +8,29 @@ def transpose(Matriks,ukuran):
             Matrikstemp[baris][kolom] = Matriks[kolom][baris]
     return Matrikstemp
 
+# cosine similarity function
+# Parameter: vector1 dan vector2
 def cosinesimilarity(vector1,vector2):
     result = 0
     for i in range (len(vector1)):
         result+=vector1[i]*vector2[i]
     return result/(vectorlen(vector1)*vectorlen(vector2))
 
+# Return panjang sebuah vektor
 def vectorlen(vectorarr):
     result = 0
     for i in range (len(vectorarr)):
         result+=vectorarr[i]*vectorarr[i]
     return math.sqrt(result)
 
+# Konversi RGB ke greyscale
+# Ga kepake though
 def RGBtoGREYSCALE(R,G,B):
     res = (0.29*R + 0.587*G + 0.114*B)
     return res
 
+# Menghitung symmetric matrix
+# Gakepake juga
 def symmetricMat(GLCMMat,ukuran):
     elmttotal = 0
     res = GLCMMat
@@ -33,6 +41,7 @@ def symmetricMat(GLCMMat,ukuran):
             elmttotal += res[i][j]
     return res
 
+# Mengembalikan nilai total semua elemen pada sebuah matriks
 def totalValue(symmetricMatrix):
     elmttotal = 0
     for j in range (256):
@@ -40,15 +49,8 @@ def totalValue(symmetricMatrix):
             elmttotal += symmetricMatrix[i][j]
     return elmttotal
 
-# def normalizedMat(symmetricMatrix):
-#     res = symmetricMatrix
-#     total = totalValue(symmetricMatrix)
-#     for j in range (4):
-#         for i in range (4):
-#             res[i][j] = symmetricMatrix[i][j] / total
-#     return res
-
-# perhitungan contrast, homogeneity, dan entropy
+# Perhitungan contrast, homogeneity, dan entropy
+# Mengembalikan tuple nilai ketiganya 
 def vectorcosine(cooccurence):
     homogeneity = 0
     entropy = 0
