@@ -13,9 +13,9 @@ len_row = len(image)
 len_col = len(image[0])
 
 def konversigray(image):
-    greyscale = [[0 for i in range(len(image))] for j in range (len(image))]
+    greyscale = [[0 for i in range(len(image[0]))] for j in range (len(image))]
     for i in range (len(image)):
-        for j in range (len(image)):
+        for j in range (len(image[0])):
             R = image[i][j][2]
             G = image[i][j][1]
             B = image[i][j][0]

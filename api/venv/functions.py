@@ -12,9 +12,13 @@ def transpose(Matriks,ukuran):
 # Parameter: vector1 dan vector2
 def cosinesimilarity(vector1,vector2):
     result = 0
+    total1 = 0
+    total2 = 0
     for i in range (len(vector1)):
         result+=vector1[i]*vector2[i]
-    return result/(vectorlen(vector1)*vectorlen(vector2))
+        total1+=vector1[i]*vector1[i]
+        total2+=vector2[i]*vector2[i]
+    return result/(math.sqrt(total1)*math.sqrt(total2))
 
 # Return panjang sebuah vektor
 def vectorlen(vectorarr):
