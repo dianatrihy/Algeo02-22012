@@ -17,13 +17,26 @@ def normalize_desc(folder, sub_folder):
     text = text.strip()
     return text
 
-def print_progress(val, val_len, folder, sub_folder, filename, bar_size=10):
-    progr = "#"*round((val)*bar_size/val_len) + " "*round((val_len - (val))*bar_size/val_len)
-    if val == 0:
-        print("", end = "\n")
-    else:
-        print("[%s] folder : %s/%s/ ----> file : %s" % (progr, folder, sub_folder, filename), end="\r")
-        
+# baris = 3
+# kolom = 4
+# Matriks1 = [[0 for i in range (baris)] for j in range (kolom)]
+# for kolom in range (n):
+#     for baris in range (n):
+#         Matriks1[baris][kolom] = int(input())
+# def transpose(Matriks,brs,kol):
+#     idxbaris = 0
+#     while idxbaris<
+#     for baris in range (brs):
+#         idxkolom = 0
+#         for kolom in range (kol):
+#             if ()
+#             idxkolom = idxkolom + 1
+#         idxbaris = idxbaris + 1
+
+def RGBtoGREYSCALE(R,G,B):
+    res = 0.29*R + 0.587*G + 0.114*B
+    return res
+
 
 # -------------------- Load Dataset ------------------------
  
@@ -37,35 +50,45 @@ descs = []
 #         sub_folder_files = os.listdir(os.path.join(dataset_dir, folder, sub_folder))
 #         len_sub_folder = len(sub_folder_files) - 1
 
-# Check if the dataset directory exists
+# define variables for checking progress
 processedfiles = 0
-totalfiles = 0
+# Check if the dataset directory exists
 if os.path.exists(dataset_dir) and os.path.isdir(dataset_dir):
     image_files = os.listdir(dataset_dir)
     
     for filename in image_files:
-        # Check if the file is an image (e.g., checking for file extensions like .jpg, .png, etc.)
         if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
             img_path = os.path.join(dataset_dir, filename)
             img = cv2.imread(img_path)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            h, w = gray.shape
-            ymin, ymax, xmin, xmax = h//2, h*2//2, w//2, w*2//2
-            crop = gray[ymin:ymax, xmin:xmax]
-            resize = cv2.resize(crop, (0,0), fx=0.5, fy=0.5)
+
+            # h, w = gray.shape
+            # ymin, ymax, xmin, xmax = h//2, h*2//2, w//2, w*2//2
+            # crop = gray[ymin:ymax, xmin:xmax]
+            # resize = cv2.resize(crop, (0,0), fx=0.5, fy=0.5)
             
-            imgs.append(resize)
+            imgs.append(gray)
             labels.append(normalize_label(os.path.splitext(filename)[0]))
-            descs.append(dataset_dir)  # Change this according to your requirement
+            descs.append(dataset_dir)
 
-            # Update and print progress
             processedfiles += 1
-            # print("Processedfiles" + processedfiles)
             print(f"Processedfiles{processedfiles}" )
-            # print_progress(processedfiles, totalfiles, '', '', filename)  # No folder or sub_folder info available
 
 
-cv2.imshow("test img", imgs[0])
+# preview the image, show that it works.
+# cv2.imshow("test img", imgs[0])
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+# Matrix greyscale
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# greyscale = [[0 for i in range (3) ] for j in range (3)]
+# print(processedfiles)
+# for i in range (processedfiles):
+#     height, width, _ = image[].shape
+
+#             # # Get the dimensions of the image
+#             # height, width, _ = image.shape
+
+#             # # Calculate the size of each grid cell
+#             # cell_height = height // 3
+#             # cell_width = width // 3
