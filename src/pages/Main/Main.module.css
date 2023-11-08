@@ -1,0 +1,104 @@
+.all{
+    background-color: #FDE5D4;
+}
+
+.navbar 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 7%;
+    background-color: #001524;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.logo 
+{
+    text-decoration: none;
+    color: #D6CC99;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.logo p
+{
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.option a
+{
+    text-decoration: none;
+    color: #D6CC99;
+    display: inline-block;
+    margin: 1rem 1rem;
+}
+
+.navbar .option a::after {
+    content: '';
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid #D6CC99;
+    transform: scaleX(0);
+    transition: 0.2s linear;
+}
+
+.option a:hover::after {
+    transform: scaleX(0.7);
+}
+
+.main{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dataset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25%;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+.dataset button, .inputimage button {
+    padding: 0.5rem 1rem;
+    background-color: #445D48;
+    color: white;
+    border-width: 0;
+    border-radius: 0.5rem;
+}
+
+.dataset button:hover, .dataset button:focus, .inputimage button:hover, .inputimage button:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em grey;
+    transform: translateY(-0.25em);
+}
+
+.image{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputimage {
+    margin: 1rem 2rem;
+    padding: 2rem;
+
+}
+
+.previewimage {
+    background-color: aliceblue;
+    width: 250px;
+    height: 150px;
+}
