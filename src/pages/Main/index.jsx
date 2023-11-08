@@ -31,7 +31,7 @@ export default function Main() {
                     <div className={classes.image}>
                         <div className={classes.inputimage}>
                             <h3>Image Input</h3>
-                            <input type="file" onChange={uploadimage}/>
+                            <input type="file"/>
                             <p>nama_file.jpg</p>
                         </div>
                         <div className={classes.previewimage}>
