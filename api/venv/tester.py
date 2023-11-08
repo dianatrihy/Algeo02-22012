@@ -90,16 +90,17 @@ if os.path.exists(dataset_dir) and os.path.isdir(dataset_dir):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
             img_path = os.path.join(dataset_dir, filename)
             img = cv2.imread(img_path)
-            greyscale = [[0 for i in range (3) ] for j in range (3)]
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
             
-            # imgs.append(gray)
-            labels.append(normalize_label(os.path.splitext(filename)[0]))
-            descs.append(dataset_dir)
+            # # imgs.append(gray)
+            # labels.append(normalize_label(os.path.splitext(filename)[0]))
+            # descs.append(dataset_dir)
 
-            processedfiles += 1
-            print(f"Processedfiles{processedfiles}" )
-
+            # processedfiles += 1
+            # print(f"Processedfiles{processedfiles}" )
+print(gray)
+print(gray[17][3])
 
 # preview the image, show that it works.
 # cv2.imshow("test img", imgs[0])
@@ -108,7 +109,7 @@ if os.path.exists(dataset_dir) and os.path.isdir(dataset_dir):
 # Matrix greyscale
 
 
-frameworkmat = [[0 for i in range (256)] for j in range (256)]
+# frameworkmat = [[0 for i in range (256)] for j in range (256)]
 
 
             # # Get the dimensions of the image

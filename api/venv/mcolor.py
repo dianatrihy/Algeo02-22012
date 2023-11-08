@@ -3,7 +3,9 @@ import cv2
 import os
 import functions
 import math
+import time
 
+start_time = time.time()
 path = "C:/Users/Asus/Documents/Thea/SMT3/TubesAlgeo2/Algeo02-22012/dataset/73.jpg"
 image = cv2.imread(path)
 print(image)
@@ -23,17 +25,9 @@ print("WARNA MERAH")
 print(R)
 
 
-def vectorlen(vectorarr):
-    result = 0
-    for i in range (len(vectorarr)):
-        result+=vectorarr[i]*vectorarr[i]
-    return math.sqrt(result)
 
-def cosinesimilarity(vector1,vector2):
-    result = 0
-    for i in range (len(vector1)):
-        result+=vector1[i]*vector2[i]
-    return result/(vectorlen(vector1)*vectorlen(vector2))
+
+
     
 
 print("\n Normalisasi matriks RGB\n")
@@ -87,3 +81,5 @@ veclanjar = []
 
 print(np.shape(matB))
 print(np.shape(B))
+
+print("--- %s seconds ---" % (time.time() - start_time))
