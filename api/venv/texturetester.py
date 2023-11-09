@@ -90,7 +90,8 @@ if os.path.exists(dataset_dir) and os.path.isdir(dataset_dir):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
             img_path = os.path.join(dataset_dir, filename)
             img = cv2.imread(img_path)
-            
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            print(gray)
             # # imgs.append(gray)
             # labels.append(normalize_label(os.path.splitext(filename)[0]))
             # descs.append(dataset_dir)

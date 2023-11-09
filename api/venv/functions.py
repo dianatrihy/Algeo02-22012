@@ -60,11 +60,11 @@ def vectorcosine(cooccurence):
     entropy = 0
     contrast =0
     for i in range (len(cooccurence)):
-        for j in range (len(cooccurence)-1):
+        for j in range (len(cooccurence)):
             homogeneity += cooccurence[i][j]/(1+((i-j)*(i-j)))
             contrast += cooccurence[i][j] * (i-j)*(i-j)
             if((cooccurence[i][j])>0):
                 # print(cooccurence[i][j])
                 entropy += cooccurence[i][j] * math.log(cooccurence[i][j],10)
-    new_vector = (homogeneity,-entropy,contrast)
+    new_vector = (homogeneity,(-1)*entropy,contrast)
     return new_vector

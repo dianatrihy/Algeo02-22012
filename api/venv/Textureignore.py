@@ -40,7 +40,7 @@ def RGBtoGREYSCALE(R,G,B):
 
 # -------------------- Load Dataset ------------------------
  
-dataset_dir = "C:/Users/Asus/Documents/Thea/SMT3/TubesAlgeo2/Algeo02-22012/dataset1"
+dataset_dir = "C:/Users/Asus/Documents/Thea/SMT3/TubesAlgeo2/Algeo02-22012/perforated/white.jpg"
 
 imgs = [] #list image matrix 
 labels = []
