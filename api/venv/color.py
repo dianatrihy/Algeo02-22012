@@ -6,15 +6,15 @@ import functions as fn
 start_time = time.time()
 
 # path = "C:\Users\HP\tubes-algeo2\dataset\0.jpg"
-image = cv2.imread("C:/Users/HP/tubes-algeo2/dataset/0.jpg")
+image = cv2.imread("C:/Users/Asus/Documents/Thea/SMT3/TubesAlgeo2/Algeo02-22012/perforated/white.jpg")
 
-R = [[0 for i in range(len(image))] for j in range (len(image))]
-G = [[0 for i in range(len(image))] for j in range (len(image))]
-B = [[0 for i in range(len(image))] for j in range (len(image))]
+R = [[0 for i in range(len(image[0]))] for j in range (len(image))]
+G = [[0 for i in range(len(image[0]))] for j in range (len(image))]
+B = [[0 for i in range(len(image[0]))] for j in range (len(image))]
 
 # denorm
 for i in range (len(image)):
-    for j in range (len(image)):
+    for j in range (len(image[0])):
         R[i][j] = image[i][j][2] / 255
         G[i][j] = image[i][j][1] / 255
         B[i][j] = image[i][j][0] / 255

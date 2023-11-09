@@ -5,12 +5,9 @@ import time
 import io
 from PIL import Image
 start_time = time.time()
-path = "C:/Users/Asus/Pictures/Smiling cat.jpg"
+# path = "C:/Users/Asus/Pictures/Smiling cat.jpg"
 # path = "C:/Users/Asus/Documents/Thea/SMT3/TubesAlgeo2/Algeo02-22012/dataset/0.jpg"
-image = cv2.imread(path)
-
-len_row = len(image)
-len_col = len(image[0])
+# image = cv2.imread(path)
 
 def konversigray(image):
     greyscale = [[0 for i in range(len(image[0]))] for j in range (len(image))]
@@ -25,12 +22,15 @@ def konversigray(image):
 
 # membuat framework matrix
 def createcooccurence(greyscale):
+    # print(greyscale)
     cooccurence = [[0 for i in range(256)] for j in range (256)]
     for i in range (256):
         for j in range(255):
-            cooccurence[(greyscale[i][j])-1][(greyscale[i][j+1])-1]+=1
+            # print(greyscale[i][j])
+            cooccurence[(greyscale[i][j])][(greyscale[i][j+1])]+=1
     # proses perhitungan cooccurence
     cooccurence = cooccurence + np.transpose(cooccurence)   #no error proof
+    # print(cooccurence[253][253])
     cooccurence = cooccurence/fn.totalValue(cooccurence)   #no error proof harusnya, untuk normalized matrix
     return cooccurence
 
