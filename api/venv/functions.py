@@ -12,9 +12,13 @@ def transpose(Matriks,ukuran):
 # Parameter: vector1 dan vector2
 def cosinesimilarity(vector1,vector2):
     result = 0
+    total1 = 0
+    total2 = 0
     for i in range (len(vector1)):
         result+=vector1[i]*vector2[i]
-    return result/(vectorlen(vector1)*vectorlen(vector2))
+        total1+=vector1[i]*vector1[i]
+        total2+=vector2[i]*vector2[i]
+    return result/(math.sqrt(total1)*math.sqrt(total2))
 
 # Return panjang sebuah vektor
 def vectorlen(vectorarr):
@@ -56,11 +60,11 @@ def vectorcosine(cooccurence):
     entropy = 0
     contrast =0
     for i in range (len(cooccurence)):
-        for j in range (len(cooccurence)-1):
+        for j in range (len(cooccurence)):
             homogeneity += cooccurence[i][j]/(1+((i-j)*(i-j)))
             contrast += cooccurence[i][j] * (i-j)*(i-j)
             if((cooccurence[i][j])>0):
                 # print(cooccurence[i][j])
                 entropy += cooccurence[i][j] * math.log(cooccurence[i][j],10)
-    new_vector = (homogeneity,-entropy,contrast)
+    new_vector = (homogeneity,(-1)*entropy,contrast)
     return new_vector
