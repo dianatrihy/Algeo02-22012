@@ -43,31 +43,29 @@
 
                 <div class="select_image">
                     <input type="file" id="select_image">
-                    <label for="select_image">Select Image File</label>
+                    <label for="image_input">Select Image File
+                        <input class="image_input" type="file" id="image_input" accept="image/*"/>
+
+                    </label>
                     <br>
                 </div>
 
-                <div class="upload_image">
-                    <input type="button" name="upload_image" value="Upload">
-                </div>
-
+                <!-- <input type="button" name="upload_image" value="Upload"> -->
+                <div id="display_image"></div>
+                <script src="index.js"></script>
             </div>
-
-            <div class="preview">
-                <div class="header_preview">
-                    <h2>Preview</h2>
-                </div>
-                
-                <div class="select_search">
-                    <input type="button" name="search" value="Search">
-                    <br>
-                    <input type="radio" id="colors">
-                    <label for="colors" class="button">Colors</label><br>
-                    <input type="radio" id="textures">
-                    <label for="textures" class="button">Textures</label><br>
-                </div> 
-            </div>
-
+            
+            
+            
+            <div class="select_search">
+                <input type="button" name="search" value="Search">
+                <br>
+                <input type="radio" id="colors">
+                <label for="colors" class="button">Colors</label><br>
+                <input type="radio" id="textures">
+                <label for="textures" class="button">Textures</label><br>
+            </div> 
+            
             <div class="result">
                 <div class="header_result">
                     <h2>Result:</h2>
