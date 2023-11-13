@@ -1,0 +1,81 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>Allens</title>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>ALLENS </h1> 
+            <p><i>Reverse Image Search</i></p>
+            <div class="menu">
+                <a href="#home">Home</a>
+                <a href="#how">How to Use</a>
+                <a href="#concepts">Basic Concepts</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+        
+        <div class="main">
+            <div class="dataset">
+                <div class="header_dataset">
+                    <h2>Upload Dataset</h2>
+                </div>
+
+                <div class="select_dataset">
+                    <input type="file" id="select_dataset">
+                    <label for="select_dataset">Select Dataset File</label>
+                    <br>
+                </div>
+
+                <div class="upload_dataset">
+                    <input type="button" name="upload_dataset" value="Upload">
+                </div>
+
+            </div>
+
+            <div class="image">
+                <div class="header_image">
+                    <h2>Upload Image</h2>
+                </div>
+
+                <div class="select_image">
+                    <input type="file" id="select_image">
+                    <label for="select_image">Select Image File</label>
+                    <br>
+                </div>
+
+                <div class="upload_image">
+                    <input type="button" name="upload_image" value="Upload">
+                </div>
+
+            </div>
+
+            <div class="preview">
+                <div class="header_preview">
+                    <h2>Preview</h2>
+                </div>
+                
+                <div class="select_search">
+                    <input type="button" name="search" value="Search">
+                    <br>
+                    <input type="radio" id="colors">
+                    <label for="colors" class="button">Colors</label><br>
+                    <input type="radio" id="textures">
+                    <label for="textures" class="button">Textures</label><br>
+                </div> 
+            </div>
+
+            <div class="result">
+                <div class="header_result">
+                    <h2>Result:</h2>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
