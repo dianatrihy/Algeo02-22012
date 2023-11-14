@@ -20,7 +20,7 @@ body {
     box-shadow: 0px 4px 2px #1D201F;
     align-items: center;
     position: fixed;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .header h1{
