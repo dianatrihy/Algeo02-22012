@@ -63,6 +63,7 @@ body {
 }
 
 .main .dataset {
+    border-style: dotted;
     color: #1D201F;
     width: 45%;
     height: 300px;
@@ -83,11 +84,11 @@ body {
     color: #1D201F;
     background-color: #8A8477;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     font-size: 18px;
-    user-select: none;
+    /* user-select: none; */
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 .main .dataset .upload_dataset{
@@ -103,9 +104,11 @@ body {
 }
 
 .main .image {
+    border-style: dotted;
     color: #1D201F;
     width: 45%;
     margin: 10px;
+    margin-left: 45px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -122,11 +125,11 @@ body {
     color: #1D201F;
     background-color: #8A8477;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     font-size: 18px;
-    user-select: none;
+    /* user-select: none; */
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 .main .image .image_input{
@@ -134,55 +137,147 @@ body {
     margin-left: 0px;
 }
 
-.main .preview{
+.main .search{
     color: #1D201F;
     width: 100%;
     height: 300px;
-    margin: 10px;
-    padding: 10px;
-    /* display: flex; */
-    align-items: center;
-    justify-content: center;
-} */
-/* 
-.main .preview .header_preview{
-    margin-right: 400px;
-    margin-bottom: 100px;
-    background-color: white;
-    height: 100px;
-} */
-
-.main .result{
-    color: #1D201F;
-    width: 100%;
-    height: 300px;
-    margin: 10px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     justify-content: center;
-    box-shadow: 0px 4px 2px #1D201F;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.main .search .type_search{
+    margin-top: -250px;
+}
+
+.main .search .type_search input{
+    display: none;
+}
+
+.main .search .type_search input + label{
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    position: relative;
+    font-size: 10px;
+    border: 4px solid #1D201F;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+}
+
+.main .search .type_search input + label:before{
+    position: absolute;
+    top: 1.5px;
+    height: 20px;
+    width: 20px;
+    content: '';
+    transition: all 0.3s ease;
+    z-index: 3;
+    border-radius: 100%;
+}
+
+.main .search .type_search input + label:after{
+    width: 70px;
+    text-align: center;
+    z-index: 2;
+    position: absolute;
+    top: 45%;
+    transform: translateY(-30%);
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.main .search .type_search input:not(:checked) + label{
+    background-color: transparent;
+    text-align: right;
+}
+
+.main .search .type_search input:not(:checked) + label:after{
+    content: attr(textures);
+    right: 0;
+    left: auto;
+    opacity: 1;
+    color: black;
+}
+
+.main .search .type_search input:not(:checked) + label:before{
+    left: 4px;
+    background-color: #1D201F;
+
+}
+
+.main .search .type_search input:checked + label{
+    text-align: left;
+    border-color: #588157
+}
+
+.main .search .type_search input:checked + label:after{
+    content: attr(colors);
+    left: 4px;
+    right: auto;
+    opacity: 1;
+    color: #588157;
+}
+
+.main .search .type_search input:checked + label:before{
+    left: 68px;
+    background-color: #588157;
+}
+
+.main .search .select_search{
+    margin-top: 20px;
 }
 
 .main .result .header_result{
-    /* margin: auto; */
-    padding-bottom: 100px;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
+    margin-left: 10px;
+    margin-top: -230px;
 }
 
+.main .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-left: 300px;
+    margin-top: -300px;
+}
+  
+.main .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+  
+.main .pagination a.active {
+    background-color: #1D201F;
+    color: white;
+}
 
-#display_image{
-    width: 375px;
-    margin-top: 5px;
-    position: relative;
-    top: 10px;
-    height: 311px;
-    border: 2px solid black;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.tag{
+    margin: 20px;
+    margin-top: 300px;
+    font-size: 15px;
+    text-align: justify;
+    scroll-snap-type: y mandatory;
+}
+
+.tag .HOW{
+    top: 0px;
+}
+
+.tag .BASIC p{
+    text-indent: 20px;
 }
