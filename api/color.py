@@ -7,9 +7,13 @@ import functions as fn
 
 # path = "C:\Users\HP\tubes-algeo2\dataset\0.jpg"
 # image = cv2.imread("C:/Users/HP/tubes-algeo2/dataset/0.jpg")
+def RGBtoHSV(path):
+    image = cv
+
 
 def color(path1, path2):
-    image = cv2.imread(path)
+    mainimage = cv2.imread(path1)
+    image = cv2.imread(path2)
     # image = np.resize(image, (256,256))git
     R = [[0 for i in range(len(image[0]))] for j in range (len(image))]
     G = [[0 for i in range(len(image[0]))] for j in range (len(image))]
