@@ -2,32 +2,53 @@ import numpy as np
 import cv2
 import time
 import functions as fn
+from PIL import Image
+import os
 
-# start_time = time.time()
+start_time = time.time()
 
 # path = "C:\Users\HP\tubes-algeo2\dataset\0.jpg"
 # image = cv2.imread("C:/Users/HP/tubes-algeo2/dataset/0.jpg")
-def RGBtoHSV(path):
-    image = cv
 
+def RGBtoHSV(path, re, H, S, V):
+    image = Image.open(path)
 
-def color(path1, path2):
-    mainimage = cv2.imread(path1)
-    image = cv2.imread(path2)
-    # image = np.resize(image, (256,256))git
-    R = [[0 for i in range(len(image[0]))] for j in range (len(image))]
-    G = [[0 for i in range(len(image[0]))] for j in range (len(image))]
-    B = [[0 for i in range(len(image[0]))] for j in range (len(image))]
+    width, height = image.size
+    new_size = (width//2, height//2)
+    resized_image = image.resize(new_size)
+
+    resized_image.save('compressed_image.jpg', optimize=True, quality=50)
+
+    imageC = cv2.imread('compressed_image.jpg')
+
+    # imageC = cv2.imread(path)
+
+    print(len(imageC))
+
+    # R = [[0 for i in range(re)] for j in range (re)]
+    # G = [[0 for i in range(re)] for j in range (re)]
+    # B = [[0 for i in range(re)] for j in range (re)]
+
+    # # denorm
+    # for i in range (re):
+    #     for j in range (re):
+    #         R[i][j] = imageC[i][j][2] / 255
+    #         G[i][j] = imageC[i][j][1] / 255
+    #         B[i][j] = imageC[i][j][0] / 255
+
+    # image = np.resize(image, (256,256))
+    R = [[0 for i in range(len(imageC[0]))] for j in range (len(imageC))]
+    G = [[0 for i in range(len(imageC[0]))] for j in range (len(imageC))]
+    B = [[0 for i in range(len(imageC[0]))] for j in range (len(imageC))]
 
     # denorm
-    for i in range (len(image)):
-        for j in range (len(image[0])):
-            R[i][j] = image[i][j][2] / 255
-            G[i][j] = image[i][j][1] / 255
-            B[i][j] = image[i][j][0] / 255
+    for i in range (len(imageC)):
+        for j in range (len(imageC[0])):
+            R[i][j] = imageC[i][j][2] / 255
+            G[i][j] = imageC[i][j][1] / 255
+            B[i][j] = imageC[i][j][0] / 255
 
     # resize
-    re = 60
     R = np.resize(R,(re,re))
     G = np.resize(G,(re,re))
     B = np.resize(B,(re,re))
@@ -44,10 +65,6 @@ def color(path1, path2):
             delta[i][j] = Cmax[i][j] - Cmin[i][j]
 
     # convert to hsv
-    H = [[0 for i in range(re)] for j in range (re)]
-    S = [[0 for i in range(re)] for j in range (re)]
-    V = [[0 for i in range(re)] for j in range (re)]
-
     for i in range (re):
         for j in range (re):
             if (delta[i][j] == 0):
@@ -66,51 +83,89 @@ def color(path1, path2):
             
             V[i][j] = Cmax[i][j]
 
-    # slicing into 3x3
-    H = np.array(H)
-    S = np.array(S)
-    V = np.array(V)
+def color(Ha, Sa, Va, path2):
+    re = 200
+    Hb = [[0 for i in range(re)] for j in range (re)]
+    Sb = [[0 for i in range(re)] for j in range (re)]
+    Vb = [[0 for i in range(re)] for j in range (re)]
+    # RGBtoHSV(path1, re, Ha, Sa, Va)
+    RGBtoHSV(path2, re, Hb, Sb, Vb)
+    print("--- %s seconds ---" % (time.time() - start_time))
 
-    re1 = re//3
-    re2 = re//3 *2
-    re3 = re
+    Ha = np.array(Ha)
+    Sa = np.array(Sa)
+    Va = np.array(Va)
 
-    H1 = H[0:re1, 0:re1]
-    S1 = S[0:re1, 0:re1]
-    V1 = V[0:re1, 0:re1]
+    Hb = np.array(Hb)
+    Sb = np.array(Sb)
+    Vb = np.array(Vb)
 
-    H2 = H[0:re1, re1:re2]
-    S2 = S[0:re1, re1:re2]
-    V2 = V[0:re1, re1:re2]
+    re1 = re // 4
+    re2 = re // 4 * 2
+    re3 = re // 4 * 3
+    re4 = re
 
-    H3 = H[0:re1, re2:re3]
-    S3 = S[0:re1, re2:re3]
-    V3 = V[0:re1, re2:re3]
+    H = fn.cosinesimilarity(np.ravel(Ha[0:re1, 0:re1]), np.ravel(Hb[0:re1, 0:re1]))
+    H += fn.cosinesimilarity(np.ravel(Ha[0:re1, re1:re2]), np.ravel(Hb[0:re1, re1:re2]))
+    H += fn.cosinesimilarity(np.ravel(Ha[0:re1, re2:re3]), np.ravel(Hb[0:re1, re2:re3]))
+    H += fn.cosinesimilarity(np.ravel(Ha[0:re1, re3:re4]), np.ravel(Hb[0:re1, re3:re4]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re1:re2, 0:re1]), np.ravel(Hb[re1:re2, 0:re1]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re1:re2, re1:re2]),np.ravel(Hb[re1:re2, re1:re2]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re1:re2, re2:re3]), np.ravel(Hb[re1:re2, re2:re3]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re1:re2, re3:re4]), np.ravel(Hb[re1:re2, re3:re4]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re2:re3, 0:re1]), np.ravel(Hb[re2:re3, 0:re1]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re2:re3, re1:re2]), np.ravel(Hb[re2:re3, re1:re2]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re2:re3, re2:re3]), np.ravel(Hb[re2:re3, re2:re3]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re2:re3, re3:re4]), np.ravel(Hb[re2:re3, re3:re4]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re3:re4, 0:re1]), np.ravel(Hb[re3:re4, 0:re1]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re3:re4, re1:re2]), np.ravel(Hb[re3:re4, re1:re2]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re3:re4, re2:re3]), np.ravel(Hb[re3:re4, re2:re3]))
+    H += fn.cosinesimilarity(np.ravel(Ha[re3:re4, re3:re4]), np.ravel(Hb[re3:re4, re3:re4]))
+    meanH = H / 16
 
-    H4 = H[re1:re2, 0:re1]
-    S4 = S[re1:re2, 0:re1]
-    V4 = V[re1:re2, 0:re1]
+    S = fn.cosinesimilarity(np.ravel(Sa[0:re1, 0:re1]), np.ravel(Sb[0:re1, 0:re1]))
+    S += fn.cosinesimilarity(np.ravel(Sa[0:re1, re1:re2]), np.ravel(Sb[0:re1, re1:re2]))
+    S += fn.cosinesimilarity(np.ravel(Sa[0:re1, re2:re3]), np.ravel(Sb[0:re1, re2:re3]))
+    S += fn.cosinesimilarity(np.ravel(Sa[0:re1, re3:re4]), np.ravel(Sb[0:re1, re3:re4]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re1:re2, 0:re1]), np.ravel(Sb[re1:re2, 0:re1]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re1:re2, re1:re2]),np.ravel(Sb[re1:re2, re1:re2]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re1:re2, re2:re3]), np.ravel(Sb[re1:re2, re2:re3]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re1:re2, re3:re4]), np.ravel(Sb[re1:re2, re3:re4]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re2:re3, 0:re1]), np.ravel(Sb[re2:re3, 0:re1]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re2:re3, re1:re2]), np.ravel(Sb[re2:re3, re1:re2]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re2:re3, re2:re3]), np.ravel(Sb[re2:re3, re2:re3]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re2:re3, re3:re4]), np.ravel(Sb[re2:re3, re3:re4]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re3:re4, 0:re1]), np.ravel(Sb[re3:re4, 0:re1]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re3:re4, re1:re2]), np.ravel(Sb[re3:re4, re1:re2]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re3:re4, re2:re3]), np.ravel(Sb[re3:re4, re2:re3]))
+    S += fn.cosinesimilarity(np.ravel(Sa[re3:re4, re3:re4]), np.ravel(Sb[re3:re4, re3:re4]))
+    meanS = S / 16
 
-    H5 = H[re1:re2, re1:re2]
-    S5 = S[re1:re2, re1:re2]
-    V5 = V[re1:re2, re1:re2]
+    V = fn.cosinesimilarity(np.ravel(Va[0:re1, 0:re1]), np.ravel(Vb[0:re1, 0:re1]))
+    V += fn.cosinesimilarity(np.ravel(Va[0:re1, re1:re2]), np.ravel(Vb[0:re1, re1:re2]))
+    V += fn.cosinesimilarity(np.ravel(Va[0:re1, re2:re3]), np.ravel(Vb[0:re1, re2:re3]))
+    V += fn.cosinesimilarity(np.ravel(Va[0:re1, re3:re4]), np.ravel(Vb[0:re1, re3:re4]))
+    V += fn.cosinesimilarity(np.ravel(Va[re1:re2, 0:re1]), np.ravel(Vb[re1:re2, 0:re1]))
+    V += fn.cosinesimilarity(np.ravel(Va[re1:re2, re1:re2]),np.ravel(Vb[re1:re2, re1:re2]))
+    V += fn.cosinesimilarity(np.ravel(Va[re1:re2, re2:re3]), np.ravel(Vb[re1:re2, re2:re3]))
+    V += fn.cosinesimilarity(np.ravel(Va[re1:re2, re3:re4]), np.ravel(Vb[re1:re2, re3:re4]))
+    V += fn.cosinesimilarity(np.ravel(Va[re2:re3, 0:re1]), np.ravel(Vb[re2:re3, 0:re1]))
+    V += fn.cosinesimilarity(np.ravel(Va[re2:re3, re1:re2]), np.ravel(Vb[re2:re3, re1:re2]))
+    V += fn.cosinesimilarity(np.ravel(Va[re2:re3, re2:re3]), np.ravel(Vb[re2:re3, re2:re3]))
+    V += fn.cosinesimilarity(np.ravel(Va[re2:re3, re3:re4]), np.ravel(Vb[re2:re3, re3:re4]))
+    V += fn.cosinesimilarity(np.ravel(Va[re3:re4, 0:re1]), np.ravel(Vb[re3:re4, 0:re1]))
+    V += fn.cosinesimilarity(np.ravel(Va[re3:re4, re1:re2]), np.ravel(Vb[re3:re4, re1:re2]))
+    V += fn.cosinesimilarity(np.ravel(Va[re3:re4, re2:re3]), np.ravel(Vb[re3:re4, re2:re3]))
+    V += fn.cosinesimilarity(np.ravel(Va[re3:re4, re3:re4]), np.ravel(Vb[re3:re4, re3:re4]))
+    meanV = V / 16
 
-    H6 = H[re1:re2, re2:re3]
-    S6 = S[re1:re2, re2:re3]
-    V6 = V[re1:re2, re2:re3]
+    return (meanH + meanS + meanV) / 3
 
-    H7 = H[re2:re3, 0:re1]
-    S7 = S[re2:re3, 0:re1]
-    V7 = V[re2:re3, 0:re1]
-
-    H8 = H[re2:re3, re1:re2]
-    S8 = S[re2:re3, re1:re2]
-    V8 = V[re2:re3, re1:re2]
-
-    H9 = H[re2:re3, re2:re3]
-    S9 = S[re2:re3, re2:re3]
-    V9 = V[re2:re3, re2:re3]
-
+# path1 = "C:/Users/HP/tubes-algeo2/dataset/1.jpg"
+# path2 = "C:/Users/HP/tubes-algeo2/dataset/2.jpg"
+# path3 = "C:/Users/HP/tubes-algeo2/dataset/3.jpg"
+# print(color(path1, path2))
+# print(color(path1, path3))
     # def formula_H(arr, H):
     #     for i in range (len(H)):
     #         for j in range (len(H[0])):
@@ -152,7 +207,7 @@ def color(path1, path2):
     #                 arr[13] += 1    
 
     # array1 = [0 for i in range(60)]
-    a = np.concatenate(np.histogram(H1), np.histogram(S1), np.histogram(V1))
+    # a = np.concatenate(np.histogram(H1), np.histogram(S1), np.histogram(V1))
     # formula_S(array1, S1)
     # formula_V(array1, V1)
 
@@ -198,14 +253,14 @@ def color(path1, path2):
 
     # array = np.concatenate([array1, array2, array3, array4, array5, array6, array7, array8, array9])
 
-    return a
+    # return a
 # 
 
-path1 = "C:/Users/HP/tubes-algeo2/dataset/9.jpg"
-a = color(path1)
-print(a)
+# path1 = "C:/Users/HP/tubes-algeo2/dataset/9.jpg"
+# a = color(path1)
+# print(a)
 
-# print("--- %s seconds ---" % (time.time() - start_time))
+print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
