@@ -1,6 +1,6 @@
 import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Main from './pages/Main';
+import Main from './pagezz';
 
 const router = createBrowserRouter([
   {

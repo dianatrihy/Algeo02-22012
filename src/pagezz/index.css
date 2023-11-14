@@ -2,6 +2,9 @@ body {
     background-color: #F7E7CE;
     margin: 0;
     padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
     font-family: bahnschrift;
 }
 
@@ -31,6 +34,7 @@ body {
 }
 
 .header .menu{
+    display: flex;
     margin-left : 500px;
     order: 3;
 }
@@ -53,6 +57,7 @@ body {
     margin-bottom: 10px;
     padding: 0px;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
 }
@@ -81,7 +86,7 @@ body {
     text-align: center;
     padding: 15px;
     font-size: 18px;
-    user-select: none;
+    /* user-select: none; */
     cursor: pointer;
     border-radius: 10px;
 }
@@ -90,11 +95,18 @@ body {
     padding: 10px;
 }
 
+.main .select_search{
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    position: relative;
+    left: 50px;
+}
+
 .main .image {
     border-style: dotted;
     color: #1D201F;
     width: 45%;
-    height: 300px;
     margin: 10px;
     margin-left: 45px;
     padding: 10px;
@@ -115,13 +127,14 @@ body {
     text-align: center;
     padding: 15px;
     font-size: 18px;
-    user-select: none;
+    /* user-select: none; */
     cursor: pointer;
     border-radius: 10px;
 }
 
-.main .image .upload_image{
+.main .image .image_input{
     padding: 10px;
+    margin-left: 0px;
 }
 
 .main .search{
@@ -131,6 +144,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     justify-content: center;
     margin: 0 auto;
     text-align: center;
@@ -247,8 +261,8 @@ body {
     background-color: #1D201F;
     color: white;
 }
-  
-  .pagination a:hover:not(.active) {
+
+.pagination a:hover:not(.active) {
     background-color: #ddd;
 }
 

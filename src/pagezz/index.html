@@ -1,6 +1,8 @@
 <!DOCTYPE html> 
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        
         <title>Allens</title>
         <link rel="stylesheet" type="text/css" href="index.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -42,20 +44,22 @@
                 </div>
 
                 <div class="select_image">
-                    <input type="file" id="select_image">
-                    <label for="select_image"><i class="fa-solid fa-upload"></i> Select Image File</label>
+                    <input type="file" id="select_image" title="input_image">
+                    <label for="image_input">Select Image File
+                        <input class="image_input" type="file" id="image_input" accept="image/*"/>
+
+                    </label>
                     <br>
                 </div>
 
-                <div class="upload_image">
-                    <input type="button" name="upload_image" value="Upload">
-                </div>
-
+                <!-- <input type="button" name="upload_image" value="Upload"> -->
+                <div id="display_image"></div>
+                <script src="index.js"></script>
             </div>
 
             <div class="search">
                 <div class="type_search">
-                    <input type="checkbox" class="toggle" id="rounded">
+                    <input type="checkbox" class="toggle" id="rounded" title="toggle">
                     <label for="rounded" colors="Colors" class="rounded" textures="Textures"></label> 
                     <br>
                 </div>
