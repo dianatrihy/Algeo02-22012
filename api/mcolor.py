@@ -6,14 +6,14 @@ import os
 import time
 import functions as fn
 # import texture as tex
-start_time = time.time()
 
 
 # membaca image inputan untuk dibandingkan
-path_image = "C:/Users/HP/tubes-algeo2/dataset/0.jpg"
-path_dataset = "C:/Users/HP/tubes-algeo2/dataset"
+# path_image = "C:/Users/HP/tubes-algeo2/dataset/0.jpg"
+# path_dataset = "C:/Users/HP/tubes-algeo2/dataset"
 
 def searchcolor(path_image, path_dataset):
+    start_time = time.time()
     re = 200
     Ha = [[0 for i in range(re)] for j in range (re)]
     Sa = [[0 for i in range(re)] for j in range (re)]
@@ -38,8 +38,6 @@ def searchcolor(path_image, path_dataset):
             processedfiles += 1
     
     return {"files": fn.sort_dictionary(final, "similarity", False), "time": time.time() - start_time}
-
-print(searchcolor(path_image, path_dataset))
 
 
 

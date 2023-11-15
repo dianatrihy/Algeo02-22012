@@ -27,15 +27,15 @@ def search_texture():
 '''
 POST
 {
-    dataset_folder: string (e.g. C:/User/folderName)
-    image: string (e.g. C:/User/image.jpg)
+    path_dataset: string (e.g. C:/User/folderName)
+    path_image: string (e.g. C:/User/image.jpg)
 }
 '''
 @app.route("/api/search_color", methods=['GET', 'POST'])
 def search_color():
     data = request.get_json()
-    if not('dataset_folder' in data and 'image' in data):
+    if not('path_dataset' in data and 'path_image' in data):
         return jsonify({ "error": 'dataset_folder or image is missing', "success": False }), 400
     
-    result = searchcolor(data["image"], data["dataset_folder"])
+    result = searchcolor(data["path_image"], data["path_dataset"])
     return jsonify(result)
