@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from mtexture import searchtexture
+from mcolor import searchcolor
 
 app = Flask(__name__)
 
@@ -36,4 +37,5 @@ def search_color():
     if not('dataset_folder' in data and 'image' in data):
         return jsonify({ "error": 'dataset_folder or image is missing', "success": False }), 400
     
-    return jsonify({ "success": True }), 400
+    result = searchcolor(data["image"], data["dataset_folder"])
+    return jsonify(result)
