@@ -1,0 +1,176 @@
+<!DOCTYPE html> 
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Allens</title>
+        <link rel="stylesheet" type="text/css" href="page.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" ></script>
+    </head>
+    <br id="home">
+    <body>
+        <div class="header">
+            <h1>ALLENS </h1> 
+            <p><i>Reverse Image Search</i></p>
+            <div class="menu">
+                <a href="page.html#home">Home</a>
+                <a href="page.html#how">How to Use</a>
+                <a href="page.html#concepts">Basic Concepts</a>
+                <a href="page.html#about">About Us</a>
+            </div>
+        </div>
+        
+        <div class="main">
+            <div class="dataset">
+                <div class="header_dataset">
+                    <h2>Upload Dataset</h2>
+                </div>
+
+                <div class="select_dataset">
+                    <input type="file" id="select_dataset">
+                    <label for="select_dataset"><i class="fa-solid fa-upload"></i> Select Dataset File</label>
+                    <br>
+                </div>
+
+                <div class="upload_dataset">
+                    <input type="button" name="upload_dataset" value="Upload">
+                </div>
+
+            </div>
+
+            <div class="container">
+                <h2>Upload Image</h2>
+                <div class="wrapper">
+                    <div class="image">
+                        <img src="" alt="">
+                    </div>
+                
+                    <div class="content">
+                        <div class="icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+
+                        <div class="text">
+                            No File Chosen
+                        </div>
+                    </div>
+
+                    <div id="cancel-btn">
+                        <i class="fas fa-times"></i>
+                    </div>
+
+                    <div class="file-name">
+                        File Name
+                    </div>
+                </div>
+                <input id="default-btn" type="file" hidden>
+                <button onclick = "defaultBtnActive()" id="custom-btn">Choose a file</button>
+            </div>
+            <script>
+                const wrapper = document.querySelector(".wrapper");
+                const fileName = document.querySelector(".file-name");
+                const cancelBtn = document.querySelector("#cancel-btn");
+                const defaultBtn = document.querySelector("#default-btn");
+                const customBtn = document.querySelector("#custom-btn");
+                const img = document.querySelector("img");
+                let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+                function defaultBtnActive(){
+                    defaultBtn.click();
+                }
+                defaultBtn.addEventListener("change", function(){
+                    const file = this.files[0];
+                    if(file){
+                        const reader = new FileReader();
+                        reader.onload = function(){
+                        const result = reader.result;
+                        img.src = result;
+                        wrapper.classList.add("active");
+                    }
+                    cancelBtn.addEventListener("click", function(){
+                        img.src = "";
+                        wrapper.classList.remove("active");
+                    });
+                    reader.readAsDataURL(file);
+                    }
+                    if(this.value){
+                        let valueStore = this.value.match(regExp);
+                        fileName.textContent = valueStore;
+                    }
+                });
+            </script>
+
+            <div class="search">
+                <div class="type_search">
+                    <input type="checkbox" class="toggle" id="rounded">
+                    <label for="rounded" colors="Colors" class="rounded" textures="Textures"></label> 
+                    <br>
+                </div>
+
+                <div class="select_search">
+                    <input type="button" name="search" value="Search">
+                </div>
+            </div>
+
+            <div class="result">
+                <div class="header_result">
+                    <h2>Result:</h2>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <div class="page">
+                    <a href="#">&laquo;</a>
+                    <a href="#">1</a>
+                    <a class="active" href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+                    <a href="#">8</a>
+                    <a href="#">9</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tag">
+        <br id="how">
+        <br><br><br>
+        <hr>   
+            <div class="HOW">
+                <h2><u>How to Use</u></h2>
+                <h3>Langkah 1: Unggah Folder Dataset</h3>
+                <p>- Klik pada tombol "Unggah Folder Dataset".</p>
+                <p>- Pilih folder dataset yang berisi gambar-gambar yang ingin Anda gunakan untuk mencari gambar serupa.</p>
+                <h3>Langkah 2: Pilih File Gambar</h3>
+                <p>- Klik pada tombol "Unggah File Gambar".</p>
+                <p>- Pilih satu file gambar yang akan menjadi dasar pencarian gambar serupa.</p>
+                <p>- Pastikan file gambar yang dipilih sesuai dengan format yang didukung oleh website.</p>
+                <h3>Langkah 3: Langkah 6: Tentukan Parameter Pencarian</h3>
+                <p>- Terdapat 2 opsi parameter pencarian yaitu colors dan textures, sesuaikan parameter pencarian sesuai kebutuhan Anda.</p>
+                <h3>Langkah 4: Mulai Pencarian</h3>
+                <p>- Setelah mengunggah folder dataset dan memilih file gambar, klik tombol "Mulai Pencarian" atau opsi serupa.</p>
+                <p>- Tunggu hingga proses pencarian selesai.</p>
+                <h3>Langkah 5: Hasil Pencarian</h3>
+                <p>- Setelah proses pencarian selesai, website akan menampilkan hasil yang mencakup gambar-gambar dari dataset yang mirip atau memiliki warna dan tekstur serupa dengan file gambar yang Anda unggah.</p>
+            </div>
+            <hr>
+
+            <div class="BASIC">
+                <h2 id="concepts"><u>Basic Concepts</u></h2>
+                <p>Platform ini mengadopsi aljabar vektor sebagai dasar untuk menggambarkan dan menganalisis data, terutama dalam konteks klasifikasi berbasis konten yang dikenal sebagai Content-Based Image Retrieval (CBIR). Fokus utama sistem ini adalah pada identifikasi gambar berdasarkan konten visual, seperti warna dan tekstur. Pengguna mengakses platform melalui peramban web, di mana antarmuka pengguna yang intuitif memungkinkan pengunggahan folder dataset yang berisi gambar-gambar referensi. Setiap gambar dalam dataset diinterpretasikan sebagai vektor dalam ruang fitur, dan analisis menggunakan aljabar vektor dilakukan untuk menganalisis karakteristik visual seperti warna dan tekstur. Pengguna dapat memilih satu gambar dari dataset sebagai referensi untuk memulai proses pencarian gambar serupa. Sistem menggunakan metode klasifikasi berbasis konten, yang melibatkan aljabar vektor, untuk mencocokkan gambar referensi dengan gambar lain dalam dataset. Hasil pencarian kemudian disajikan kepada pengguna. Dengan pendekatan ini, aljabar vektor menjadi fondasi yang kuat untuk menggambarkan dan menganalisis konten visual, memungkinkan sistem temu balik gambar mengidentifikasi gambar berdasarkan karakteristik warna dan tekstur dengan akurat.</p>
+            </div>
+            <hr>
+
+            <div class="ABOUT">
+                <h2 id="about"><u>About Us</u></h2>
+                <p>Platform ini dikembangkan oleh tim ALLENS yang terdiri dari 3 mahasiswi Teknik Informatika ITB angkatan 2022, yaitu:</p>
+                <p>1. Thea Josephine H (13522012)</p>
+                <p>2. Diana Tri Handayani (13522104)</p>
+                <p>3. Chelvadinda (13522154)</p>
+            </div>
+            <hr>
+    </body>
+
+</html>
