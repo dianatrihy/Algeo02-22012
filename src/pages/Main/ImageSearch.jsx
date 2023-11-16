@@ -182,6 +182,7 @@ export default function ImageSearch() {
       {result && result.files.map(file => { //menampilkan gmbr
         return <div key={file.filename}>
           <img src={"http://localhost:5000/image?name="+file.filename} width={'100'} />
+          <div>{(file.similarity*100).toFixed(4)}</div>
         </div>
       })}
       </div>
