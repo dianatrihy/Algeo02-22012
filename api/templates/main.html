@@ -4,7 +4,7 @@
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         
         <title>Allens</title>
-        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     </head>
     <br id="home">
@@ -19,7 +19,7 @@
                 <a href="index.html#about">About Us</a>
             </div>
         </div>
-        
+
         <div class="main">
             <div class="dataset">
                 <div class="header_dataset">
@@ -54,7 +54,7 @@
 
                 <!-- <input type="button" name="upload_image" value="Upload"> -->
                 <div id="display_image"></div>
-                <script src="index.js"></script>
+                <script src="{{ url_for('static',filename='styles/main.js') }}"></script>
             </div>
 
             <div class="search">
@@ -68,6 +68,63 @@
                     <input type="button" name="search" value="Search">
                 </div>
             </div>
+
+            <script>
+                function Searching(){
+                    var checkbox = document.querySelector('.toggle');
+                    var searchType;
+                    if (checkbox.checked){
+                        searchType = 'colors';
+                    }
+                    else{
+                        searchType = 'textures';
+                    }
+                    if(searchType==='textures'){
+                        searchText();
+                    }
+                    else{
+                        searchColor();
+                    }
+                }
+                function searchColor(){
+                    fetch('http://your-server-url/api/search_color', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        path_dataset: 'C:/User/folderName',
+                        path_image: 'C:/User/image.jpg'
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('color-result').innerHTML = JSON.stringify(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+                }
+                function searchText(){
+                    fetch('http://127.0.0.1:5000/api/search_texture', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        dataset_folder: 'C:/User/folderName',
+                        image: 'C:/User/image.jpg'
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('texture-result').innerHTML = JSON.stringify(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+                }
+            </script>
 
             <div class="result">
                 <div class="header_result">

@@ -5,6 +5,7 @@ import cv2
 import os
 import time
 import functions as fn
+from directory import get_upload_dir
 # import texture as tex
 
 
@@ -12,7 +13,8 @@ import functions as fn
 # path_image = "C:/Users/HP/tubes-algeo2/dataset/0.jpg"
 # path_dataset = "C:/Users/HP/tubes-algeo2/dataset"
 
-def searchcolor(path_image, path_dataset):
+def searchcolor(path_image):
+    path_dataset = get_upload_dir()
     start_time = time.time()
     re = 200
     Ha = [[0 for i in range(re)] for j in range (re)]
