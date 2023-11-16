@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/api/venv
+*/__pycache__
+/dataset
+/dataset1
+/perforated
+/testtext
+/.idea
+/dataset_upload

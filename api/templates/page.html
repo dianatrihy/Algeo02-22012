@@ -3,9 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>Allens</title>
+        <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/page.css') }}"> -->
         <link rel="stylesheet" type="text/css" href="page.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-        <script src="https://kit.fontawesome.com/a076d05399.js" ></script>
+        <!-- <script src="https://kit.fontawesome.com/a076d05399.js" ></script> -->
     </head>
     <br id="home">
     <body>
@@ -13,13 +14,25 @@
             <h1>ALLENS </h1> 
             <p><i>Reverse Image Search</i></p>
             <div class="menu">
-                <a href="page.html#home">Home</a>
-                <a href="page.html#how">How to Use</a>
-                <a href="page.html#concepts">Basic Concepts</a>
-                <a href="page.html#about">About Us</a>
+                <a href="#home">Home</a>
+                <a href="#how">How to Use</a>
+                <a href="#concepts">Basic Concepts</a>
+                <a href="#about">About Us</a>
             </div>
         </div>
-        
+        <script>
+            document.addEventListener('click', function (event) {
+              if (event.target.tagName === 'A') {
+                event.preventDefault(); 
+                const targetSection = event.target.getAttribute('href').substring(1);
+          
+                // Scroll to the target section
+                document.getElementById(targetSection).scrollIntoView({
+                  behavior: 'smooth'
+                });
+              }
+            });
+        </script>
         <div class="main">
             <div class="dataset">
                 <div class="header_dataset">
@@ -27,7 +40,7 @@
                 </div>
 
                 <div class="select_dataset">
-                    <input type="file" id="select_dataset">
+                    <input type="file" id="select_dataset" value="Upload" webkitdirectory directory multiple>
                     <label for="select_dataset"><i class="fa-solid fa-upload"></i> Select Dataset File</label>
                     <br>
                 </div>
@@ -37,7 +50,7 @@
                 </div>
 
             </div>
-
+            
             <div class="container">
                 <h2>Upload Image</h2>
                 <div class="wrapper">
@@ -63,7 +76,7 @@
                         File Name
                     </div>
                 </div>
-                <input id="default-btn" type="file" hidden>
+                <input id="default-btn" type="file" hidden accept="image/*">
                 <button onclick = "defaultBtnActive()" id="custom-btn">Choose a file</button>
             </div>
             <script>
@@ -99,6 +112,116 @@
                 });
             </script>
 
+
+
+            <!-- <script>
+                function validateFiles(files) {
+                    for (const file of files) {
+                        if (!file.type.startsWith('image/')) {
+                            return false; // Not an image file
+                        }
+                    }
+                    return true; // All files are images
+                }
+                
+                function search() {
+                    // console.log("Button clicked");
+                    const datasetInput = document.getElementById('select_dataset');
+                    const datasetFiles = datasetInput.files;
+                    console.log(datasetFiles);
+                    if (!validateFiles(datasetFiles)) {
+                        alert('Please select only image files.');
+                        return;
+                    }
+                    const datasetFolder = datasetFiles[0].webkitRelativePath.split('/')[0];
+                    // const datasetFolder = document.getElementById('select_dataset').value;
+                    const image = document.getElementById('default-btn').value;
+                    const toggleTexture = document.getElementById('rounded').checked;
+                    let apiUrl;
+                    let requestData;
+        
+                    if (toggleTexture) {
+                        apiUrl = '/api/search_texture';
+                        requestData = { dataset_folder: datasetFolder, image: image };
+                    } else {
+                        apiUrl = '/api/search_color';
+                        requestData = { path_dataset: datasetFolder, path_image: image };
+                    }
+        
+                    fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestData),
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        document.getElementById('searchResult').innerText = JSON.stringify(result);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            </script> -->
+
+            <script>
+                function Searching(){
+                    var checkbox = document.querySelector('.toggle');
+                    var searchType;
+                    if (checkbox.checked){
+                        searchType = 'colors';
+                    }
+                    else{
+                        searchType = 'textures';
+                    }
+                    if(searchType==='textures'){
+                        searchText();
+                    }
+                    else{
+                        searchColor();
+                    }
+                }
+                function searchColor(){
+                    fetch('http://127.0.0.1:5000/api/search_color', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        path_dataset: 'C:/User/folderName',
+                        path_image: 'C:/User/image.jpg'
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('color-result').innerHTML = JSON.stringify(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+                }
+                function searchText(){
+                    fetch('http://127.0.0.1:5000/api/search_texture', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        dataset_folder: 'C:/User/folderName',
+                        image: 'C:/User/image.jpg'
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('texture-result').innerHTML = JSON.stringify(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+                }
+            </script>
+
             <div class="search">
                 <div class="type_search">
                     <input type="checkbox" class="toggle" id="rounded">
@@ -107,10 +230,15 @@
                 </div>
 
                 <div class="select_search">
-                    <input type="button" name="search" value="Search">
+                    <form id="searchForm">
+                    
+                    
+                        <input type="button" name="search" value="Search" onclick="search()">
+                    </form>
+                    <!-- <input type="button" name="search" value="Search"> -->
                 </div>
+            
             </div>
-
             <div class="result">
                 <div class="header_result">
                     <h2>Result:</h2>

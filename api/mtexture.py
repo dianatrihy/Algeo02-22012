@@ -3,6 +3,7 @@ import os
 import time
 import numpy as np
 import functions as fn
+from directory import get_upload_dir
 
 def konversigray(image):
     greyscale = [[0 for i in range(len(image[0]))] for j in range (len(image))]
@@ -30,11 +31,12 @@ def createcooccurence(greyscale):
 
 
 
-def searchtexture(dataset_dir,image):
+def searchtexture(image):
+    dataset_dir = get_upload_dir()
     start_time = time.time()
 
     # membaca image inputan untuk dibandingkan
-    mimage = cv2.imread(image)
+    mimage = cv2.imdecode(image, 1)
     len_row = len(mimage)
     len_col = len(mimage[0])
     mgreyscale = konversigray(mimage)

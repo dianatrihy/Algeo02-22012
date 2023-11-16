@@ -23,7 +23,7 @@ def RGBtoHSV(path, re, H, S, V):
 
     # imageC = cv2.imread(path)
 
-    print(len(imageC))
+    # print(len(imageC))
 
     # R = [[0 for i in range(re)] for j in range (re)]
     # G = [[0 for i in range(re)] for j in range (re)]
