@@ -209,10 +209,10 @@ export default function ImageSearch() {
           return <div key={file.filename}>
             <img src={"http://localhost:5000/image?name="+file.filename} width={'100'} alt={`Result ${file.filename}`} />
             <div>{(file.similarity*100).toFixed(4)}</div>
-            <Pagination totalPosts={result.files.length} itemperpage={itemperpage} setcurrentPage={setcurrentPage} currentPage={currentPage}></Pagination>
           </div>
         })}
       </div>
+      <Pagination totalPosts={result.files.length} itemperpage={itemperpage} setcurrentPage={setcurrentPage} currentPage={currentPage}></Pagination>
     </div>
   </div>
 }
