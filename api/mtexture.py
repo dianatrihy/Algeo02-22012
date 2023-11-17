@@ -40,7 +40,7 @@ def searchtexture(image):
     len_row = len(mimage)
     len_col = len(mimage[0])
     mgreyscale = konversigray(mimage)
-    print(mgreyscale)
+    # print(mgreyscale)
     mcooccurence = createcooccurence(mgreyscale)
     mtoople = fn.vectorcosine(mcooccurence) 
 

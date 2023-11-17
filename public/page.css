@@ -47,7 +47,6 @@ body {
 }
 
 .main {
-    margin-top: 60px;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -85,16 +84,14 @@ body {
     border-radius: 10px;
 }
 
-.main .dataset .upload_dataset{
-    padding: 10px;
-}
+
 
 .main .container{
     height: 350px;
     width: 430px;
     position: relative;
     margin-left: 150px;
-    margin-top: -50px;
+    margin-top: 80px;
 }
 
 .main .container h2{
@@ -306,6 +303,8 @@ body {
     display: flex;
     justify-content: center;
     list-style: none;
+    align-items: center;
+    background-color: #FFF;
 }
   
 .main .pagination a {

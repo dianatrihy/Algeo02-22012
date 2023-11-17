@@ -1,7 +1,5 @@
-import classNamees from './Main.module.css'
 import Header from './Header'
 import ImageSearch from './ImageSearch'
-// import uploadimage from './hook/uploadimage'
 
 
 export default function Main() {
