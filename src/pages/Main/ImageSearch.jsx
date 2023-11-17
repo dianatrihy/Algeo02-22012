@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Pagination from './Pagination';
 export default function ImageSearch() {
   const [datasets, setDatasets] = React.useState([]);
   const [toggle, setToggle] = React.useState(false);
@@ -9,6 +10,27 @@ export default function ImageSearch() {
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [result, setResult] = React.useState();
   const inputRef = React.useRef();
+  const [currentPage, setcurrentPage] = React.useState(1);
+  const [itemperpage, setitemperpage] = React.useState(10);
+  const lastIndex = currentPage*itemperpage;
+  const firstIndex = lastIndex - itemperpage;
+
+  
+  // const renderPageNumbers = pages.map(number => {
+  //   return (
+  //     <li
+  //       key={number}
+  //       id={number}
+  //       onClick={this.handleClick}
+  //     >
+  //       {number}
+  //     </li>
+  //   );
+  // });
+
+  
+
+// }
 
   async function uploadDataset() {
     if(!datasets.length) alert('Pilih gambar dulu')
@@ -29,7 +51,7 @@ export default function ImageSearch() {
     }
     setUploadProgress(100)
   }
-
+  
   React.useEffect(() => {
     const fileReader = new FileReader()
     if(image) {
@@ -40,7 +62,7 @@ export default function ImageSearch() {
       }
     }
   }, [image]);
-
+  
   async function searchImage() {
     if(!image) {
       alert('Pilih file dulu')
@@ -67,36 +89,36 @@ export default function ImageSearch() {
     }
     setSearchLoading(false)
     // const result = {data: {
-    //   "files": [
-    //     {
-    //       "filename": "perforated_0001.jpg",
-    //       "similarity": 1
-    //     },
-    //     {
-    //       "filename": "perforated_0013.jpg",
-    //       "similarity": 0.9999999914058237
-    //     },
-    //     {
-    //       "filename": "perforated_0003.jpg",
-    //       "similarity": 0.9999995431729115
-    //     },
-    //     {
+      //   "files": [
+        //     {
+          //       "filename": "perforated_0001.jpg",
+          //       "similarity": 1
+          //     },
+          //     {
+            //       "filename": "perforated_0013.jpg",
+            //       "similarity": 0.9999999914058237
+            //     },
+            //     {
+              //       "filename": "perforated_0003.jpg",
+              //       "similarity": 0.9999995431729115
+              //     },
+              //     {
     //       "filename": "perforated_0004.jpg",
     //       "similarity": 0.9999964466001358
     //     },
     //     {
-    //       "filename": "perforated_0012.jpg",
-    //       "similarity": 0.9999957387518099
-    //     }
-    //   ],
-    //   "time": 3.011603593826294
-    // }}
-    setResult(result.data)
-  }
-
-
-
-  return <div className="main">
+      //       "filename": "perforated_0012.jpg",
+      //       "similarity": 0.9999957387518099
+      //     }
+      //   ],
+      //   "time": 3.011603593826294
+      // }}
+      setResult(result.data)
+    }
+    
+    
+    
+    return <div className="main">
     <div className="dataset" id="home">
       <div className="header_dataset">
         <h2>Upload Dataset</h2>
@@ -178,29 +200,18 @@ export default function ImageSearch() {
           <div>Found {result.files.length} results in {result.time.toFixed(3)}</div>
         }
       </div>
-      <div style={{display: 'flex'}}>
-      {result && result.files.map(file => { //menampilkan gmbr
-        return <div key={file.filename}>
-          <img src={"http://localhost:5000/image?name="+file.filename} width={'100'} />
-          <div>{(file.similarity*100).toFixed(4)}</div>
-        </div>
-      })}
-      </div>
-    </div>
 
-    <div className="pagination">
-      <div className="page">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a className="active" href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">7</a>
-        <a href="#">8</a>
-        <a href="#">9</a>
-        <a href="#">&raquo;</a>
+      
+  
+        {/* const totalPage = Math.ceil(result.files.length)/itemperpage; */}
+      <div style={{display: 'flex'}}>
+        {result && result.files.slice(firstIndex,lastIndex).map(file => { //menampilkan gmbr
+          return <div key={file.filename}>
+            <img src={"http://localhost:5000/image?name="+file.filename} width={'100'} alt={`Result ${file.filename}`} />
+            <div>{(file.similarity*100).toFixed(4)}</div>
+            <Pagination totalPosts={result.files.length} itemperpage={itemperpage} setcurrentPage={setcurrentPage} currentPage={currentPage}></Pagination>
+          </div>
+        })}
       </div>
     </div>
   </div>

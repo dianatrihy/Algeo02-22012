@@ -34,7 +34,6 @@ def createcooccurence(greyscale):
     cooccurence = cooccurence/fn.totalValue(cooccurence)   #no error proof harusnya, untuk normalized matrix
     return cooccurence
 
-tester = [[1,1,0,0],[0,0,1,0],[0,0,0,2],[0,0,1,0]]
 
 # with np.printoptions(threshold=np.inf):
 #     print(cooccurence)
