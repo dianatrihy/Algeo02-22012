@@ -12,28 +12,11 @@ export default function ImageSearch() {
   const [result, setResult] = React.useState();
   const inputRef = React.useRef();
   const [currentPage, setcurrentPage] = React.useState(1);
-  // const [itemperpage, setitemperpage] = React.useState(10);
   const [itemperpage] = React.useState(6);
   const lastIndex = currentPage*itemperpage;
   const firstIndex = lastIndex - itemperpage;
 
   
-  // const renderPageNumbers = pages.map(number => {
-  //   return (
-  //     <li
-  //       key={number}
-  //       id={number}
-  //       onClick={this.handleClick}
-  //     >
-  //       {number}
-  //     </li>
-  //   );
-  // });
-
-  
-
-// }
-
   async function uploadDataset() {
     if(!datasets.length) alert('Pilih gambar dulu')
 
@@ -194,23 +177,6 @@ export default function ImageSearch() {
       }}/>
       <button className={classes.button} onClick={() => inputRef.current.click()} id={classes["custom-btn"]}>Choose a file</button>
     </div>
-
-    {/* {toggle&&"true"} */}
-    {/* <div className={classes.search}>
-      <div className={classes.type_search}>
-        <input type="checkbox" checked = {toggle} className="toggle" id="rounded" onChange={(e) => {
-          setToggle(e.target.checked)
-          // console.log(e.target.files)
-          // setDatasets(e.target.files)
-        }} />
-        <label for="rounded" colors="Colors" className="rounded" textures="Textures" ></label>
-        <br/>
-      </div>
-
-      <div className={classes.select_search}>
-        <input className={classes.button} type="button" name="search" value="Search" onClick={searchImage}/>
-      </div>
-    </div> */}
     
     <div className={classes.hasil}>
       <div className={classes.result}>
@@ -224,10 +190,7 @@ export default function ImageSearch() {
           <div>Found {result.files.length} results in {result.time.toFixed(3)}</div>
         }
       </div>
-
       
-  
-        {/* const totalPage = Math.ceil(result.files.length)/itemperpage; */}
       <div className={classes.galeri} style={{display: 'flex'}}>
         {result && result.files.slice(firstIndex,lastIndex).map(file => { //menampilkan gmbr
           return <div className={classes.section_display} key={file.filename}>
