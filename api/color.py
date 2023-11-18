@@ -17,13 +17,13 @@ def RGBtoHSV(path, re, H, S, V):
     new_size = (width//2, height//2)
     resized_image = image.resize(new_size)
 
-    resized_image.save('compressed_image.jpg', optimize=True, quality=50)
+    resized_image.convert("RGB").save('compressed_image.jpg', optimize=True, quality=50)
 
     imageC = cv2.imread('compressed_image.jpg')
 
     # imageC = cv2.imread(path)
 
-    print(len(imageC))
+    # print(len(imageC))
 
     # R = [[0 for i in range(re)] for j in range (re)]
     # G = [[0 for i in range(re)] for j in range (re)]
