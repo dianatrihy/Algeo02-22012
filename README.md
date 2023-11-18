@@ -7,16 +7,10 @@
 | Chelvadinda            | 13522154 |
 
 ## Table of Contents 💫
-* [General Info](#general-information)
-* [Technologies Used](#technologies-used)
+* [Tools Used](#tools-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
-* [Setup](#setup)
+* [Setting Up](#setting-up)
 * [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
 
 ## Tools Used 🪄
 - React
