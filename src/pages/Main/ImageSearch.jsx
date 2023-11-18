@@ -206,13 +206,14 @@ export default function ImageSearch() {
         {/* const totalPage = Math.ceil(result.files.length)/itemperpage; */}
       <div style={{display: 'flex'}}>
         {result && result.files.slice(firstIndex,lastIndex).map(file => { //menampilkan gmbr
-          return <div key={file.filename}>
-            <img src={"http://localhost:5000/image?name="+file.filename} width={'100'} alt={`Result ${file.filename}`} />
+          return <div className='section-display' key={file.filename}>
+            <img className='image-result' src={"http://localhost:5000/image?name="+file.filename} width={'100'} alt={`Result ${file.filename}`} />
             <div>{(file.similarity*100).toFixed(4)}</div>
           </div>
         })}
       </div>
-      <Pagination totalPosts={result.files.length} itemperpage={itemperpage} setcurrentPage={setcurrentPage} currentPage={currentPage}></Pagination>
+      {result && result.files && (
+      <Pagination totalPosts={result.files.length} itemperpage={itemperpage} setcurrentPage={setcurrentPage} currentPage={currentPage}></Pagination>)}
     </div>
   </div>
 }

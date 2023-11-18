@@ -338,3 +338,11 @@ body {
 .tag .BASIC p{
     text-indent: 20px;
 }
+
+.image-result{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
