@@ -1,8 +1,8 @@
-.all{
+*{
     background-color: #FDE5D4;
 }
 
-.navbar 
+/* .navbar 
 {
     display: flex;
     justify-content: space-between;
@@ -60,9 +60,10 @@
 }
 
 .dataset {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    /* flex-direction: row; */
+    
+    /* align-items: center;
     justify-content: center;
     margin-top: 25%;
 }
@@ -101,4 +102,506 @@ h3 {
     background-color: aliceblue;
     width: 250px;
     height: 150px;
+} */ 
+
+
+/* ------------------------ */
+
+
+body {
+    background-color: #F7E7CE;
+    margin: 0;
+    padding: 0;
+    font-family: bahnschrift;
+    width: 100vw;
+    
+}
+
+.header{
+    background-color: #588157;
+    color: #1D201F;
+    width: 100vw;
+    height: 10vh;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 4px 2px #1D201F;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+}
+
+.header h1{
+    margin-left: 3vw;
+    order: 1;
+    background-color: #588157;
+}
+
+.header p{
+    margin-left: 10px;
+    order: 2;
+    background-color: #588157;
+    font-style: italic;
+}
+
+.header .menu{
+    margin-left : 45vw;
+    order: 3;
+    background-color: #588157;
+}
+
+.header .menu a{
+    color: #1D201F;
+    background-color: #588157;
+    text-decoration: none;
+    margin : 10px;
+    order: 3;
+}
+
+.header .menu a:hover{
+    color: #F7E7CE;
+}
+
+.main {
+    margin-top: 10vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    height: auto;
+    width: 80vw;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 1 1;
+    grid-template-rows: 1 1 1 1;
+    /* flex-wrap: wrap; */
+    align-items: center;
+
+}
+
+.main .dataset {
+    color: #1D201F;
+    width: 40vw;
+    height: 65vh;
+    /* margin: 10px;
+    padding: 10px; */
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.main .dataset .select_dataset input{
+    display: none;
+}
+
+.main .dataset .select_dataset label{
+    display: inline-block;
+    color: #1D201F;
+    background-color: #8A8477;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    /* user-select: none; */
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.main .dataset .fileselected {
+    margin: 1rem;
+}
+
+
+
+.main .container{
+    height: 65vh;
+    width: 40vw;
+    /* width: 430px; */
+    /* position: relative; */
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 150px;
+    margin-top: 80px; */
+}
+
+.main .container h2{
+    /* margin-left: 146px; */
+    color: #1D201F;
+}
+
+.main .container .wrapper{
+    position: relative;
+    height: 256px;
+    width: 256px;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px dashed #c2cdda;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.main .container .wrapper.active{
+    border: none;
+}
+
+.main .container .wrapper .image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .container .wrapper .image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.main .container .wrapper .content .icon{
+    font-size: 100px;
+    color: #c2cdda;
+    margin-left: 20px;
+}
+
+.main .container .wrapper .content .text{
+    font-size: 20px;
+    font-weight: 500;
+    color: #c2cdda;
+    z-index: 999;
+
+}
+
+.main .container .wrapper #cancel-btn{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+    display: none;
+}
+
+.main .container .wrapper.active:hover #cancel-btn{
+    display: block;
+}
+
+.main .container .wrapper #cancel-btn:hover{
+    color: #e74c3c;
+}
+
+.main .container .wrapper .file_name{
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 18px;
+    display: none;
+    background-image: linear-gradient(135deg, #424242 0%, #777777 100%);
+}
+
+.main .container .wrapper.active:hover .file_name{
+    display: block;
+}
+
+.main .container #custom_btn{
+    margin-top: 30px;
+    width: 100%;    
+    height: 50px;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: linear-gradient(135deg, #424242 0%, #777777 100%);
+}
+
+.main .search{
+    color: #1D201F;
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-left: -320px;
+    margin-top: -50px; */
+    text-align: center;
+}
+
+.main .but_search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .main .search .type_search{
+    margin-top: -250px;
+} */
+
+.main .search .type_search input{
+    display: none;
+}
+
+.main .search .type_search input + label{
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    position: relative;
+    font-size: 10px;
+    border: 4px solid #1D201F;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+}
+
+.main .search .type_search input + label:before{
+    position: absolute;
+    top: 1.5px;
+    height: 20px;
+    width: 20px;
+    content: '';
+    transition: all 0.3s ease;
+    z-index: 3;
+    border-radius: 100%;
+}
+
+.main .search .type_search input + label:after{
+    width: 70px;
+    text-align: center;
+    /* z-index: 2; */
+    position: absolute;
+    top: 45%;
+    transform: translateY(-30%);
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.main .search .type_search input:not(:checked) + label{
+    background-color: transparent;
+    text-align: right;
+}
+
+.main .search .type_search input:not(:checked) + label:after{
+    content: attr(textures);
+    right: 0;
+    left: auto;
+    opacity: 1;
+    color: black;
+}
+
+.main .search .type_search input:not(:checked) + label:before{
+    left: 4px;
+    background-color: #1D201F;
+
+}
+
+.main .search .type_search input:checked + label{
+    text-align: left;
+    border-color: #588157
+}
+
+.main .search .type_search input:checked + label:after{
+    content: attr(colors);
+    left: 4px;
+    right: auto;
+    opacity: 1;
+    color: #588157;
+}
+
+.main .search .type_search input:checked + label:before{
+    left: 68px;
+    background-color: #588157;
+}
+
+/* .main .search .select_search{
+    margin-top: 20px;
+} */
+
+.main .result{
+    /* grid-row: 4 / 5; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .main .result .header_result{
+    margin-left: 10px;
+    margin-right: 500px;
+    margin-top: -150px;
+} */
+
+.main .hasil {
+    grid-row: 2 / 3;
+    grid-column: 1 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: auto;
+}
+
+.main .pagination .image_result {
+    margin: 1rem;
+}
+
+.main .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+    background-color: #FFF;
+}
+
+.main .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.main .pagination a.active {
+    background-color: #1D201F;
+    color: white;
+}
+
+.main .galeri{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.tag{
+    /* margin: 20px; */
+    /* margin-top: 300px; */
+    margin: 0 3vw ;
+    font-size: 15px;
+    text-align: justify;
+    scroll-snap-type: y mandatory;
+}
+
+.tag .HOW{
+    top: 0px;
+}
+
+.tag .BASIC p{
+    text-indent: 20px;
+}
+
+.image-result{
+    padding: 10px;
+}
+
+.button{
+    background-color: #588157;
+    text-decoration: none;
+    border-style: none;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.7rem;
+    color: #ddd;
+    margin: 0.7rem 1rem;
+}
+
+.button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.section_display {
+    margin: 1rem;
+    box-sizing: border-box;
+    background: white;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.image_result img {
+    border: 1px solid #ccc;
+    width: 256px;
+    height: 256px;
+    /* height: auto; */
+}
+
+.section_display .desc {
+    background-color: white;
+    text-align: center;
+}
+
+.narsis {
+    display: flex;
+}
+
+.thea {
+    box-sizing: border-box;
+    background-color: white;
+    padding: 0.5rem 0.5rem 0.5rem;
+    margin: 2rem;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);;
+}
+
+.thea p{
+    background-color: white;
+    text-align: center;
+}
+
+.diana {
+    box-sizing: border-box;
+    background-color: white;
+    padding: 0.5rem 0.5rem 0.5rem;
+    margin: 2rem;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);;
+}
+
+.diana p{
+    background-color: white;
+    text-align: center;
+}
+
+.chelva {
+    box-sizing: border-box;
+    background-color: white;
+    padding: 0.5rem 0.5rem 0.5rem;
+    margin: 2rem;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);;
+}
+
+.chelva p{
+    background-color: white;
+    text-align: center;
+}
+
+
+.about img {
+    width: 200px;
+    height: auto;
+    margin: 0.5rem;
 }

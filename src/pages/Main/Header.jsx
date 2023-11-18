@@ -1,4 +1,5 @@
 import React from 'react'
+import classes from './Main.module.css'
 
 export default function Header() {
   React.useEffect(() => {
@@ -19,10 +20,10 @@ export default function Header() {
     });
   }, []);
 
-  return <div className="header">
-    <h1>ALLENS </h1>
-    <p><i>Reverse Image Search</i></p>
-    <div className="menu">
+  return <div className={classes.header}>
+    <h1>ALLENS</h1>
+    <p>Reverse Image Search</p>
+    <div className={classes.menu}>
       <a href="#home">Home</a>
       <a href="#how">How to Use</a>
       <a href="#concepts">Basic Concepts</a>

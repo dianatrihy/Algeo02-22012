@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
-import Pagination from './Pagination';
+import Pagination from './Pagination'
+import classes from './Main.module.css'
 export default function ImageSearch() {
   const [datasets, setDatasets] = React.useState([]);
   const [toggle, setToggle] = React.useState(false);
@@ -11,7 +12,8 @@ export default function ImageSearch() {
   const [result, setResult] = React.useState();
   const inputRef = React.useRef();
   const [currentPage, setcurrentPage] = React.useState(1);
-  const [itemperpage, setitemperpage] = React.useState(10);
+  // const [itemperpage, setitemperpage] = React.useState(10);
+  const [itemperpage] = React.useState(6);
   const lastIndex = currentPage*itemperpage;
   const firstIndex = lastIndex - itemperpage;
 
@@ -118,12 +120,12 @@ export default function ImageSearch() {
     
     
     
-    return <div className="main">
-    <div className="dataset" id="home">
-      <div className="header_dataset">
+    return <div className={classes.main}>
+    <div className={classes.dataset} id="home">
+      <div className={classes.header_dataset}>
         <h2>Upload Dataset</h2>
       </div>
-      <div className="select_dataset">
+      <div className={classes.select_dataset}>
         <input type="file" id="select_dataset" directory="" webkitdirectory="" onChange={(e) => {
           console.log(e.target.files)
           setDatasets(e.target.files)
@@ -131,49 +133,71 @@ export default function ImageSearch() {
         <label htmlFor="select_dataset"><i className="fa-solid fa-upload"></i> Select Dataset File</label>
         <br/>
       </div>
-      <div>{datasets?.length} file selected</div>
-      <div>Uploading: {uploadProgress}%</div>
-      <div className="upload_dataset">
-        <input type="button" name="upload_dataset" value="Upload" onClick={() => {
+      <div className={classes.fileselected}>{datasets?.length} file selected</div>
+      {/* <div>Uploading: {uploadProgress}%</div> */}
+      <div className={classes.upload_dataset}>
+        <input className={classes.button} type="button" name="upload_dataset" value="Upload" onClick={() => {
           uploadDataset().then(() => setDatasets([]))
         }}/>
       </div>
+      <div>Uploading: {uploadProgress}%</div>
+
+      <div className={classes.search}>
+        <div>
+          <p>Switch to change the comparison by texture or color</p>
+        </div>
+        <div className={classes.but_search}>
+          <div className={classes.type_search}>
+            <input type="checkbox" checked = {toggle} className="toggle" id="rounded" onChange={(e) => {
+              setToggle(e.target.checked)
+              // console.log(e.target.files)
+              // setDatasets(e.target.files)
+            }} />
+            <label for="rounded" colors="Colors" className="rounded" textures="Textures" ></label>
+            <br/>
+          </div>
+
+          <div className={classes.select_search}>
+            <input className={classes.button} type="button" name="search" value="Search" onClick={searchImage}/>
+          </div>
+          </div>
+      </div>
     </div>
 
-    <div className="container">
+    <div className={classes.container}>
       <h2>Upload Image</h2>
-      <div className="wrapper">
-        <div className="image">
+      <div className={classes.wrapper}>
+        <div className={classes.image}>
           <img src={loadedImage} alt="" />
         </div>
 
-        <div className="content">
-          <div className="icon">
-            <i className="fas fa-upload"></i>
+        <div className={classes.content}>
+          <div className={classes.icon}>
+            <i className={classes.button}></i>
           </div>
 
-          <div className="text">
+          <div className={classes.text}>
             No File Chosen
           </div>
         </div>
 
-        <div id="cancel-btn">
+        <div id={classes["cancel_btn"]}>
           <i className="fas fa-times"></i>
         </div>
 
-        <div className="file-name">
+        <div className={classes.file_name}>
           File Name
         </div>
       </div>
-      <input id="default-btn" type="file" hidden accept="image/*" ref={inputRef} onChange={(e) => {
+      <input  id={classes["default-btn"]} type="file" hidden accept="image/*" ref={inputRef} onChange={(e) => {
         setImage(e.target.files[0])
       }}/>
-      <button onClick={() => inputRef.current.click()} id="custom-btn">Choose a file</button>
+      <button className={classes.button} onClick={() => inputRef.current.click()} id={classes["custom-btn"]}>Choose a file</button>
     </div>
 
     {/* {toggle&&"true"} */}
-    <div className="search">
-      <div className="type_search">
+    {/* <div className={classes.search}>
+      <div className={classes.type_search}>
         <input type="checkbox" checked = {toggle} className="toggle" id="rounded" onChange={(e) => {
           setToggle(e.target.checked)
           // console.log(e.target.files)
@@ -183,14 +207,14 @@ export default function ImageSearch() {
         <br/>
       </div>
 
-      <div className="select_search">
-        <input type="button" name="search" value="Search" onClick={searchImage}/>
+      <div className={classes.select_search}>
+        <input className={classes.button} type="button" name="search" value="Search" onClick={searchImage}/>
       </div>
-
-    </div>
-    <div>
-      <div className="result">
-        <div className="header_result">
+    </div> */}
+    
+    <div className={classes.hasil}>
+      <div className={classes.result}>
+        <div className={classes.header_result}>
           <h2>Result:</h2>
         </div>
       </div>
@@ -204,11 +228,11 @@ export default function ImageSearch() {
       
   
         {/* const totalPage = Math.ceil(result.files.length)/itemperpage; */}
-      <div style={{display: 'flex'}}>
+      <div className={classes.galeri} style={{display: 'flex'}}>
         {result && result.files.slice(firstIndex,lastIndex).map(file => { //menampilkan gmbr
-          return <div className='section-display' key={file.filename}>
-            <img className='image-result' src={"http://localhost:5000/image?name="+file.filename} width={'100'} alt={`Result ${file.filename}`} />
-            <div>{(file.similarity*100).toFixed(4)}</div>
+          return <div className={classes.section_display} key={file.filename}>
+            <img className={classes.image_result} src={"http://localhost:5000/image?name="+file.filename} width={'150'} alt={`Result ${file.filename}`} />
+            <div className={classes.desc}>{(file.similarity*100).toFixed(4)}%</div>
           </div>
         })}
       </div>
