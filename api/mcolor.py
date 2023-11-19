@@ -32,12 +32,11 @@ def searchcolor(path_image):
 
     image_files = os.listdir(path_dataset)
     for filename in image_files:
-        if filename.lower().endswith(('.png', '.jpg', '.jpeg')) and (processedfiles < 20):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
             img_path = os.path.join(path_dataset, filename)
             similarity = color.color(Ha, Sa, Va, img_path)
             if(similarity >= 0.6):
                 final.append({"filename": filename, "similarity": similarity})
-            processedfiles += 1
     
     return {"files": fn.sort_dictionary(final, "similarity", False), "time": time.time() - start_time}
 

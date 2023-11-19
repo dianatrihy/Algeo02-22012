@@ -14,12 +14,13 @@ def RGBtoHSV(path, re, H, S, V):
     image = Image.open(path)
 
     width, height = image.size
-    new_size = (width//2, height//2)
+    new_size = (width//4, height//4)
     resized_image = image.resize(new_size)
 
     resized_image.convert("RGB").save('compressed_image.jpg', optimize=True, quality=50)
 
     imageC = cv2.imread('compressed_image.jpg')
+    # imageC = cv2.imread(path)
 
     # imageC = cv2.imread(path)
 
@@ -82,6 +83,89 @@ def RGBtoHSV(path, re, H, S, V):
                 S[i][j] = delta[i][j]/Cmax[i][j]
             
             V[i][j] = Cmax[i][j]
+
+def HSVtoHisto(H, S, V):
+    H = np.histogram(H, bins= [0, 25, 40, 120, 190, 270, 295, 315, 360])
+    S = np.histogram(S, bins= [0, 0.2, 0.7, 1])
+    V = np.histogram(V, bins= [0, 0.2, 0.7, 1])
+    blok = np.concatenate((H[0], S[0], V[0]))
+    return blok
+    
+
+# def colorhisto(Ha, Sa, Va, path2):
+#     re = 200
+#     Hb = [[0 for i in range(re)] for j in range (re)]
+#     Sb = [[0 for i in range(re)] for j in range (re)]
+#     Vb = [[0 for i in range(re)] for j in range (re)]
+#     # RGBtoHSV(path1, re, Ha, Sa, Va)
+#     RGBtoHSV(path2, re, Hb, Sb, Vb)
+#     print("--- %s seconds ---" % (time.time() - start_time))
+
+#     Ha = np.array(Ha)
+#     Sa = np.array(Sa)
+#     Va = np.array(Va)
+
+#     Hb = np.array(Hb)
+#     Sb = np.array(Sb)
+#     Vb = np.array(Vb)
+
+#     re1 = re // 4
+#     re2 = re // 4 * 2
+#     re3 = re // 4 * 3
+#     re4 = re
+
+#     blok1a = HSVtoHisto(Ha[0:re1, 0:re1], Sa[0:re1, 0:re1], Va[0:re1, 0:re1])
+#     blok2a = HSVtoHisto(Ha[0:re1, re1:re2], Sa[0:re1, re1:re2], Va[0:re1, re1:re2])
+#     blok3a = HSVtoHisto(Ha[0:re1, re2:re3], Sa[0:re1, re2:re3], Va[0:re1, re2:re3])
+#     blok4a = HSVtoHisto(Ha[0:re1, re3:re4], Sa[0:re1, re3:re4], Va[0:re1, re3:re4])
+#     blok5a = HSVtoHisto(Ha[re1:re2, 0:re1], Sa[re1:re2, 0:re1], Va[re1:re2, 0:re1])
+#     blok6a = HSVtoHisto(Ha[re1:re2, re1:re2], Sa[re1:re2, re1:re2], Va[re1:re2, re1:re2])
+#     blok7a = HSVtoHisto(Ha[re1:re2, re2:re3], Sa[re1:re2, re2:re3], Va[re1:re2, re2:re3])
+#     blok8a = HSVtoHisto(Ha[re1:re2, re3:re4], Sa[re1:re2, re3:re4], Va[re1:re2, re3:re4])
+#     blok9a = HSVtoHisto(Ha[re2:re3, 0:re1], Sa[re2:re3, 0:re1], Va[re2:re3, 0:re1])
+#     blok10a = HSVtoHisto(Ha[re2:re3, re1:re2], Sa[re2:re3, re1:re2], Va[re2:re3, re1:re2])
+#     blok11a = HSVtoHisto(Ha[re2:re3, re2:re3], Sa[re2:re3, re2:re3], Va[re2:re3, re2:re3])
+#     blok12a = HSVtoHisto(Ha[re2:re3, re3:re4], Sa[re2:re3, re3:re4], Va[re2:re3, re3:re4])
+#     blok13a = HSVtoHisto(Ha[re3:re4, 0:re1], Sa[re3:re4, 0:re1], Va[re3:re4, 0:re1])
+#     blok14a = HSVtoHisto(Ha[re3:re4, re1:re2], Sa[re3:re4, re1:re2], Va[re3:re4, re1:re2])
+#     blok15a = HSVtoHisto(Ha[re3:re4, re2:re3], Sa[re3:re4, re2:re3], Va[re3:re4, re2:re3])
+#     blok16a = HSVtoHisto(Ha[re3:re4, re3:re4], Sa[re3:re4, re3:re4], Va[re3:re4, re3:re4])
+
+#     blok1b = HSVtoHisto(Hb[0:re1, 0:re1], Sb[0:re1, 0:re1], Vb[0:re1, 0:re1])
+#     blok2b = HSVtoHisto(Hb[0:re1, re1:re2], Sb[0:re1, re1:re2], Vb[0:re1, re1:re2])
+#     blok3b = HSVtoHisto(Hb[0:re1, re2:re3], Sb[0:re1, re2:re3], Vb[0:re1, re2:re3])
+#     blok4b = HSVtoHisto(Hb[0:re1, re3:re4], Sb[0:re1, re3:re4], Vb[0:re1, re3:re4])
+#     blok5b = HSVtoHisto(Hb[re1:re2, 0:re1], Sb[re1:re2, 0:re1], Vb[re1:re2, 0:re1])
+#     blok6b = HSVtoHisto(Hb[re1:re2, re1:re2], Sb[re1:re2, re1:re2], Vb[re1:re2, re1:re2])
+#     blok7b = HSVtoHisto(Hb[re1:re2, re2:re3], Sb[re1:re2, re2:re3], Vb[re1:re2, re2:re3])
+#     blok8b = HSVtoHisto(Hb[re1:re2, re3:re4], Sb[re1:re2, re3:re4], Vb[re1:re2, re3:re4])
+#     blok9b = HSVtoHisto(Hb[re2:re3, 0:re1], Sb[re2:re3, 0:re1], Vb[re2:re3, 0:re1])
+#     blok10b = HSVtoHisto(Hb[re2:re3, re1:re2], Sb[re2:re3, re1:re2], Vb[re2:re3, re1:re2])
+#     blok11b = HSVtoHisto(Hb[re2:re3, re2:re3], Sb[re2:re3, re2:re3], Vb[re2:re3, re2:re3])
+#     blok12b = HSVtoHisto(Hb[re2:re3, re3:re4], Sb[re2:re3, re3:re4], Vb[re2:re3, re3:re4])
+#     blok13b = HSVtoHisto(Hb[re3:re4, 0:re1], Sb[re3:re4, 0:re1], Vb[re3:re4, 0:re1])
+#     blok14b = HSVtoHisto(Hb[re3:re4, re1:re2], Sb[re3:re4, re1:re2], Vb[re3:re4, re1:re2])
+#     blok15b = HSVtoHisto(Hb[re3:re4, re2:re3], Sb[re3:re4, re2:re3], Vb[re3:re4, re2:re3])
+#     blok16b = HSVtoHisto(Hb[re3:re4, re3:re4], Sb[re3:re4, re3:re4], Vb[re3:re4, re3:re4])
+
+#     similarity = fn.cosinesimilarity(blok1a, blok1b)
+#     similarity += fn.cosinesimilarity(blok2a, blok2b)
+#     similarity += fn.cosinesimilarity(blok3a, blok3b)
+#     similarity += fn.cosinesimilarity(blok4a, blok4b)
+#     similarity += fn.cosinesimilarity(blok5a, blok5b)
+#     similarity += fn.cosinesimilarity(blok6a, blok6b)
+#     similarity += fn.cosinesimilarity(blok7a, blok7b)
+#     similarity += fn.cosinesimilarity(blok8a, blok8b)
+#     similarity += fn.cosinesimilarity(blok9a, blok9b)
+#     similarity += fn.cosinesimilarity(blok10a, blok10b)
+#     similarity += fn.cosinesimilarity(blok11a, blok11b)
+#     similarity += fn.cosinesimilarity(blok12a, blok12b)
+#     similarity += fn.cosinesimilarity(blok13a, blok13b)
+#     similarity += fn.cosinesimilarity(blok14a, blok14b)
+#     similarity += fn.cosinesimilarity(blok15a, blok15b)
+#     similarity += fn.cosinesimilarity(blok16a, blok16b)
+
+#     return similarity/16
 
 def color(Ha, Sa, Va, path2):
     re = 200
@@ -160,6 +244,23 @@ def color(Ha, Sa, Va, path2):
     meanV = V / 16
 
     return (meanH + meanS + meanV) / 3
+
+
+# path1 = "C:/Users/HP/tubes-algeo2/dataset/416.jpg"
+# path2 = "C:/Users/HP/tubes-algeo2/dataset/0.jpg"
+# # path_dataset = get_upload_dir()
+# start_time = time.time()
+# re = 200
+# Ha = [[0 for i in range(re)] for j in range (re)]
+# Sa = [[0 for i in range(re)] for j in range (re)]
+# Va = [[0 for i in range(re)] for j in range (re)]
+# RGBtoHSV(path1, re, Ha, Sa, Va)
+# print(color(Ha, Sa, Va, path2))
+# Ha = [[0 for i in range(re)] for j in range (re)]
+# Sa = [[0 for i in range(re)] for j in range (re)]
+# Va = [[0 for i in range(re)] for j in range (re)]
+# RGBtoHSV(path1, re, Ha, Sa, Va)
+# print(colorhisto(Ha, Sa, Va, path2))
 
 # path1 = "C:/Users/HP/tubes-algeo2/dataset/1.jpg"
 # path2 = "C:/Users/HP/tubes-algeo2/dataset/2.jpg"
