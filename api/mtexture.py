@@ -25,7 +25,7 @@ def createcooccurence(greyscale):
             cooccurence[(greyscale[i][j])][(greyscale[i][j+1])]+=1
     # proses perhitungan cooccurence
     cooccurence = cooccurence + np.transpose(cooccurence)   #no error proof
-    cooccurence = cooccurence/fn.totalValue(cooccurence)   #no error proof harusnya, untuk normalized matrix
+    cooccurence = cooccurence/np.sum(cooccurence)   #no error proof harusnya, untuk normalized matrix
     return cooccurence
 
 
@@ -37,10 +37,7 @@ def searchtexture(image):
 
     # membaca image inputan untuk dibandingkan
     mimage = cv2.imdecode(image, 1)
-    len_row = len(mimage)
-    len_col = len(mimage[0])
     mgreyscale = konversigray(mimage)
-    # print(mgreyscale)
     mcooccurence = createcooccurence(mgreyscale)
     mtoople = fn.vectorcosine(mcooccurence) 
 

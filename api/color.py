@@ -59,13 +59,17 @@ def RGBtoHSV(path, re, H, S, V):
     Cmin = [[0 for i in range(re)] for j in range (re)]
     delta = [[0 for i in range(re)] for j in range (re)]
 
-    for i in range (re):
-        for j in range (re):
-            Cmax[i][j] = max(R[i][j],G[i][j],B[i][j])
-            Cmin[i][j] = min(R[i][j],G[i][j],B[i][j])
-            delta[i][j] = Cmax[i][j] - Cmin[i][j]
+    # for i in range (re):
+    #     for j in range (re):
+    #         Cmax[i][j] = max(R[i][j],G[i][j],B[i][j])
+    #         Cmin[i][j] = min(R[i][j],G[i][j],B[i][j])
+    #         delta[i][j] = Cmax[i][j] - Cmin[i][j]
 
     # convert to hsv
+    Cmax = np.maximum.reduce([R, G, B])
+    Cmin = np.minimum.reduce([R, G, B])
+    delta = Cmax - Cmin
+
     for i in range (re):
         for j in range (re):
             if (delta[i][j] == 0):
