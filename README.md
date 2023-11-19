@@ -28,7 +28,7 @@
 - Open up the terminal and run npm install to ensure you have npm installed
 - Run `npm server:setup` to download all the requirements in the requirements.txt provided.
 - Check your flask version with `flask --version`, has to be 3.0.0 or it wouldn't run.
-- Run `npm server:start` to start the API. And yes, it will show a blank page.
+- Run `npm server:start` to start the API. And yes, it will show a blank page. If it gives the unknown command, run `python -m flask --app ./api/main.py --debug run` instead.
 - Open up another terminal and type in `npm start` to start the website on local.
 - Enjoy! Open the website in the localhost link showed in the terminal.
 - To stop the website just close the tab and `ctrl + C` on the terminal.
