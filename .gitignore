@@ -25,11 +25,7 @@ yarn-error.log*
 launch.json
 /api/venv
 */__pycache__
-/dataset
-/dataset1
-/perforated
 /testtext
 /.idea
 /dataset_upload
-
-/test
+/node_modules
